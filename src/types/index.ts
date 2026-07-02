@@ -101,6 +101,9 @@ export interface ProtocolSpec {
 export interface ProjectComponent {
   instanceId: string;
   componentId: string;
+  quantity: number;
+  customLabel?: string;
+  settings?: Record<string, any>;
 }
 
 export interface PinConnection {
@@ -109,6 +112,7 @@ export interface PinConnection {
   fromPin: string;
   toComponentId: string; // instanceId
   toPin: string;
+  label?: string; // custom connection mapping name
 }
 
 export interface Project {
@@ -117,7 +121,7 @@ export interface Project {
   description: string;
   ownerId: string;
   ownerName: string;
-  boardId: string;
+  boardId: string; // References BoardSpec ID
   components: ProjectComponent[];
   connections: PinConnection[];
   firmwareCode?: string;
@@ -127,6 +131,29 @@ export interface Project {
   isPublic: boolean;
   createdAt: string;
   updatedAt: string;
+  
+  // Future-proof milestone parameters
+  difficulty: 'Beginner' | 'Intermediate' | 'Expert';
+  estimatedBuildTime: string; // e.g. "2 hours"
+  category: string; // e.g. "IoT", "Robotics"
+  tags: string[];
+  powerConfig: {
+    source: 'USB' | 'Battery' | 'External';
+    voltage: 3.3 | 5.0;
+    currentBudgetMa: number;
+    estimatedPowerW: number;
+  };
+  draftStatus: 'draft' | 'published';
+  estimatedCostUsd: number;
+  version: string; // e.g. "1.0.0"
+  timeline: { step: number; title: string; description: string }[];
+  validationIssues: ValidationIssue[];
+  aiReviewResult?: {
+    score: number;
+    status: 'passed' | 'failed' | 'unchecked';
+    feedback: string;
+  };
+  recoveryBackups?: { timestamp: string; dataString: string }[];
 }
 
 export interface ValidationIssue {

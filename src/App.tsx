@@ -72,6 +72,7 @@ const AppLayout: React.FC = () => {
               <Route path="/" element={<DashboardView />} />
               <Route path="/registry" element={<RegistryView />} />
               <Route path="/builder" element={<BuilderView />} />
+              <Route path="/builder/:projectId" element={<BuilderView />} />
               <Route path="/projects" element={<ProjectsView />} />
               <Route path="/knowledge" element={<KnowledgeView />} />
               <Route path="/community" element={<CommunityView />} />
