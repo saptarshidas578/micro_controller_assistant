@@ -389,6 +389,8 @@ export const BuilderView: React.FC = () => {
           <StepCommunicationOverview 
             projectData={project} 
             componentsData={components} 
+            board={selectedBoard}
+            onChange={handleProjectUpdate}
           />
         )}
         {activeStep === 5 && (
