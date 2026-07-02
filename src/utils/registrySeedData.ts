@@ -279,18 +279,91 @@ const componentCategories: ('sensor' | 'display' | 'actuator' | 'indicator' | 'p
   'sensor', 'sensor', 'sensor', 'display', 'actuator', 'indicator', 'power', 'driver', 'ic', 'passive'
 ];
 
-const sensorNames = [
-  "DHT22 Temperature & Humidity Sensor", "MPU6050 6-Axis Gyro", "BMP280 Barometric Pressure",
-  "HC-SR04 Ultrasonic Distance", "DS18B20 Waterproof Temp", "LDR Photoresistor Module",
-  "HC-SR501 PIR Motion", "YL-69 Soil Moisture", "MQ-2 Gas Sensor", "MAX6675 Thermocouple",
-  "APDS-9960 RGB Gesture", "TCRT5000 IR Barrier", "VL53L0X ToF Distance", "BH1750 Ambient Light",
-  "BMP180 Barometric Sensor", "DHT12 I2C Temperature", "PIR Motion Sensor v2", "Soil Hygrometer Module",
-  "Carbon Monoxide Detector MQ-7", "Flame Sensor Module IR"
+const sensorPool = [
+  "DHT22 Precision Temperature Sensor", "MPU6050 6-Axis Gyroscope", "BMP280 Barometric Pressure Sensor",
+  "HC-SR04 Ultrasonic Distance Sensor", "DS18B20 Waterproof Temperature Probe", "LDR Photoresistor Light Sensor",
+  "HC-SR501 PIR Motion Detection Sensor", "YL-69 Soil Moisture Hygrometer", "MQ-2 Gas Smoke Detector",
+  "MAX6675 Thermocouple Sensor", "APDS-9960 RGB Gesture Sensor", "TCRT5000 IR Barrier Line Finder",
+  "VL53L0X Time-of-Flight LiDAR Laser", "BH1750 Ambient Lux Light Sensor", "BMP180 Barometric Sensor",
+  "DHT12 I2C Temperature Sensor", "PIR Motion Sensor v2", "Soil Hygrometer Module",
+  "Carbon Monoxide Detector MQ-7", "Flame Sensor Module Infrared"
 ];
+
+const displayPool = [
+  "SH1106 1.3 inch OLED Screen", "HD44780 16x2 Character LCD", "I2C 16x2 LCD Interface Module",
+  "MAX7219 8x8 LED Dot Matrix", "TM1637 4-Digit 7-Segment Display", "Nokia 5110 LCD Screen Shield",
+  "ILI9341 2.8 inch TFT Color Display", "SSD1351 128x128 Color OLED Screen", "ST7735 1.8 inch Color TFT Screen",
+  "PCD8544 LCD Screen", "SSD1309 OLED Display Shield", "MAX7219 Segment Display Module",
+  "0.96 inch SPI OLED Display", "1.8 inch TFT Shield"
+];
+
+const actuatorPool = [
+  "MG996R Metal Gear High Torque Servo", "5V Active Electromagnetic Relay Module", "2-Channel Opto-isolated Relay",
+  "12V Solenoid Valve Lock Actuator", "5V Haptic Vibration Motor", "KY-008 Laser Transmitter Module",
+  "DC Geared Motor 130 Chassis", "Stepper Motor 28BYJ-48 Driver", "Solenoid DC 6V Valve",
+  "Micro Linear Actuator Servo", "Coreless Drive Motor"
+];
+
+const indicatorPool = [
+  "5V Active Buzzer Alarm Module", "5V Passive Tone Buzzer Indicator", "Red LED 5mm Indicator",
+  "Green LED 5mm Indicator", "Blue LED 5mm Indicator", "Yellow LED 5mm Indicator",
+  "White LED 5mm Indicator", "RGB LED Common Cathode Module", "WS2812B NeoPixel 8-Bit LED Strip",
+  "WS2812B NeoPixel Ring 16-Bit", "10-Segment LED Bar Graph", "Traffic Light LED Module",
+  "KY-006 Passive Buzzer", "KY-012 Active Buzzer", "Flashing LED 5mm"
+];
+
+const powerPool = [
+  "LM2596 DC-DC Step-Down Buck Converter", "XL6009 DC-DC Step-Up Boost Converter", "AMS1117-3.3V Linear Voltage Regulator",
+  "TP4056 1A Li-Ion Battery Charger", "USB Boost DC 5V Power Module", "18650 Battery Shield V3 Power Bank",
+  "MB102 Breadboard Power Supply Module", "DC-DC 9V to 5V Step-Down Converter", "INA219 I2C Current Sensor Module",
+  "ACS712 20A Hall Effect Current Sensor", "AP2112K-3.3 Linear Regulator", "MCP1700-3.3V Low Quiescent LDO",
+  "LM7805 5V Regulator", "DC-DC 9V to 5V Step-Down Converter v2"
+];
+
+const driverPool = [
+  "L298N Dual H-Bridge Motor Driver", "L293D Motor Drive Shield Expansion", "A4988 Stepper Motor Driver Module",
+  "DRV8825 Stepper Motor Driver Carrier", "PCA9685 16-Channel 12-bit PWM Servo Driver", "TB6600 Stepper Motor Driver Controller",
+  "MAX485 TTL to RS485 Transceiver", "CH340G USB to TTL Serial Converter", "CP2102 USB to UART Bridge Module",
+  "PL2303 USB to Serial TTL Adapter", "ULN2003A Stepper Driver Board", "L9110S Dual Motor Driver Module"
+];
+
+const icPool = [
+  "NE555 Precision Timer IC Oscillator", "LM358 Dual Operational Amplifier Op-Amp", "74HC595 8-Bit Shift Register",
+  "74HC165 8-Bit Parallel-In Shift Register", "CD4051 8-Channel Analog Multiplexer", "MCP3008 8-Channel 10-Bit ADC SPI",
+  "PCF8574 I2C 8-Bit I/O Port Expander", "MCP4725 12-Bit Digital-to-Analog Converter DAC", "AT24C256 I2C 256K Serial EEPROM",
+  "DS1307 I2C Real Time Clock IC", "MAX232 RS232 Converter IC", "PCF8563 RTC Chip", "DS3231 Precision RTC IC"
+];
+
+const passivePool = [
+  "10k Ohm Carbon Film Resistor", "220 Ohm LED Resistor", "1k Ohm Pull-up Resistor",
+  "10uF 50V Electrolytic Capacitor", "100nF Ceramic Noise Capacitor", "100uF Electrolytic Filtering Capacitor",
+  "10k Ohm Linear Rotary Potentiometer", "10k Ohm Breadboard Trimpot Potentiometer", "1N4007 Rectifier Diode 1A",
+  "1N4148 High Speed Switch Diode", "Photoresistor LDR 5mm Light", "100 Ohm Carbon Resistor",
+  "4.7k Ohm I2C Pull-up Resistor", "47uF Electrolytic Capacitor", "10nF Ceramic Capacitor"
+];
+
+const getRealisticName = (category: string, idx: number): string => {
+  let pool: string[] = [];
+  switch (category) {
+    case 'sensor': pool = sensorPool; break;
+    case 'display': pool = displayPool; break;
+    case 'actuator': pool = actuatorPool; break;
+    case 'indicator': pool = indicatorPool; break;
+    case 'power': pool = powerPool; break;
+    case 'driver': pool = driverPool; break;
+    case 'ic': pool = icPool; break;
+    case 'passive': pool = passivePool; break;
+    default: return `Generic Hardware Node #${idx}`;
+  }
+  const item = pool[idx % pool.length];
+  // Add index suffix if pool elements overlap to keep name unique
+  const duplicateCount = Math.floor(idx / pool.length);
+  return duplicateCount > 0 ? `${item} (Alt-Revision ${duplicateCount + 1})` : item;
+};
 
 const generatedComponents: ComponentSpec[] = Array.from({ length: 98 }).map((_, idx) => {
   const cat = componentCategories[idx % componentCategories.length];
-  const name = idx < sensorNames.length ? sensorNames[idx] : `Component_${idx + 3} Spec`;
+  const name = getRealisticName(cat, idx);
   const is33 = idx % 2 === 0;
   
   return {
@@ -298,7 +371,7 @@ const generatedComponents: ComponentSpec[] = Array.from({ length: 98 }).map((_, 
     name,
     category: cat,
     manufacturerId: idx % 4 === 0 ? "mfr_adafruit" : (idx % 4 === 1 ? "mfr_sparkfun" : "mfr_seeed"),
-    description: `A professional grade electronic component representing a standard ${cat} module.`,
+    description: `A professional-grade electronic module representing a standard ${name} configuration.`,
     imageURL: `https://api.dicebear.com/7.x/bottts/svg?seed=${name}`,
     operatingVoltage: is33 ? 3.3 : 5.0,
     maxVoltage: is33 ? 3.6 : 5.5,
