@@ -62,11 +62,11 @@ const AdminRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 // --- Application Layout Container ---
 const AppLayout: React.FC = () => {
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-950 text-slate-100">
+    <div className="flex h-screen overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Sidebar />
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         <TopBar />
-        <main className="flex-1 overflow-y-auto p-6 bg-slate-950">
+        <main className="flex-1 overflow-y-auto p-6 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
           <ErrorBoundary>
             <Routes>
               <Route path="/" element={<DashboardView />} />
