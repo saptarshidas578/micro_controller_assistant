@@ -5,16 +5,18 @@ import { Bell, LogOut, Sun, Moon, Sparkles } from 'lucide-react';
 export const TopBar: React.FC = () => {
   const { user, logout } = useAuth();
   const [showNotifications, setShowNotifications] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(() =>
+    window.document.documentElement.classList.contains('dark')
+  );
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    // Standard Tailwind dark mode toggling class in HTML node
+    const nextDark = !isDarkMode;
+    setIsDarkMode(nextDark);
     const root = window.document.documentElement;
-    if (isDarkMode) {
-      root.classList.remove('dark');
-    } else {
+    if (nextDark) {
       root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
     }
   };
 

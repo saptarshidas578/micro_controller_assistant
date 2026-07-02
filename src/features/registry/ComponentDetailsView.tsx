@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentSpec, Library } from '../../types';
 import { ArrowLeft, Heart, FileText, Settings, ShieldAlert, Sparkles, BookOpen } from 'lucide-react';
+import { HardwareImage } from '../../components/ui/HardwareImage';
 
 interface ComponentDetailsProps {
   component: ComponentSpec;
@@ -53,10 +54,10 @@ export const ComponentDetailsView: React.FC<ComponentDetailsProps> = ({
         <div className="space-y-6">
           <div className="glass-panel rounded-2xl p-6 text-center shadow-md relative overflow-hidden">
             <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-full blur-xl" />
-            <img 
-              src={component.imageURL} 
-              alt={component.name} 
-              className="w-32 h-32 mx-auto rounded-xl object-contain bg-slate-100 dark:bg-slate-950 p-2 border border-slate-200 dark:border-slate-800"
+            <HardwareImage 
+              category={component.category}
+              name={component.name}
+              className="w-32 h-32 mx-auto"
             />
             <h2 className="text-xl font-bold mt-4 text-slate-950 dark:text-slate-100">{component.name}</h2>
             <p className="text-sm text-purple-600 dark:text-purple-400 font-semibold">{manufacturerName}</p>

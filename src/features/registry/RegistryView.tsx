@@ -9,6 +9,7 @@ import { filterAndSearchRegistry, SearchFilters, SortOption } from '../../utils/
 import { BoardSpec, ComponentSpec, Library, Manufacturer, ProtocolSpec } from '../../types';
 import { BoardDetailsView } from './BoardDetailsView';
 import { ComponentDetailsView } from './ComponentDetailsView';
+import { HardwareImage } from '../../components/ui/HardwareImage';
 import { 
   Grid, List, Search, SlidersHorizontal, Heart, 
   Clock, Eye, Star, Cpu, BadgeCheck, Loader2 
@@ -249,10 +250,10 @@ export const RegistryView: React.FC = () => {
                           </button>
                         </div>
 
-                        <img 
-                          src={item.imageURL} 
-                          alt={item.name} 
-                          className="w-16 h-16 object-contain rounded-lg bg-slate-100/50 dark:bg-slate-950 p-1 border border-slate-200 dark:border-slate-800/50 mb-3"
+                        <HardwareImage 
+                          category={isBoard ? 'board' : (item as ComponentSpec).category}
+                          name={item.name}
+                          className="w-16 h-16 mb-3"
                         />
                         <h4 className="font-bold text-slate-850 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">
                           {item.name}
@@ -285,10 +286,10 @@ export const RegistryView: React.FC = () => {
                       className="p-4 hover:bg-slate-50 dark:hover:bg-slate-900/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 cursor-pointer group"
                     >
                       <div className="flex items-center gap-4">
-                        <img 
-                          src={item.imageURL} 
-                          alt={item.name} 
-                          className="w-12 h-12 object-contain rounded-lg bg-slate-100/50 dark:bg-slate-950 p-1 border border-slate-200 dark:border-slate-800/50"
+                        <HardwareImage 
+                          category={isBoard ? 'board' : (item as ComponentSpec).category}
+                          name={item.name}
+                          className="w-12 h-12"
                         />
                         <div>
                           <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -436,7 +437,11 @@ export const RegistryView: React.FC = () => {
                       onClick={() => handleOpenItem(item.id)}
                       className="flex items-center gap-3 p-2 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/40 rounded-xl hover:border-blue-500/30 transition-all cursor-pointer"
                     >
-                      <img src={item.imageURL} className="w-8 h-8 object-contain rounded p-0.5 bg-white border border-slate-200 dark:border-slate-800" alt={item.name} />
+                      <HardwareImage 
+                        category={'category' in item ? item.category : 'board'}
+                        name={item.name}
+                        className="w-8 h-8 p-0.5"
+                      />
                       <span className="text-xs font-semibold text-slate-700 dark:text-slate-250 truncate">{item.name}</span>
                     </div>
                   ))
@@ -462,7 +467,11 @@ export const RegistryView: React.FC = () => {
                       onClick={() => handleOpenItem(item.id)}
                       className="flex items-center gap-3 p-2 bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/40 rounded-xl hover:border-blue-500/30 transition-all cursor-pointer"
                     >
-                      <img src={item.imageURL} className="w-8 h-8 object-contain rounded p-0.5 bg-white border border-slate-200 dark:border-slate-800" alt={item.name} />
+                      <HardwareImage 
+                        category={'category' in item ? item.category : 'board'}
+                        name={item.name}
+                        className="w-8 h-8 p-0.5"
+                      />
                       <span className="text-xs font-semibold text-slate-700 dark:text-slate-250 truncate">{item.name}</span>
                     </div>
                   ))

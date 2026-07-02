@@ -1,6 +1,7 @@
 import React from 'react';
 import { BoardSpec, Library, Manufacturer } from '../../types';
 import { Cpu, ArrowLeft, Download, ShieldCheck, Heart, BookOpen, Star } from 'lucide-react';
+import { HardwareImage } from '../../components/ui/HardwareImage';
 
 interface BoardDetailsProps {
   board: BoardSpec;
@@ -51,10 +52,10 @@ export const BoardDetailsView: React.FC<BoardDetailsProps> = ({
         <div className="space-y-6">
           <div className="glass-panel rounded-2xl p-6 text-center shadow-md relative overflow-hidden">
             <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-full blur-xl" />
-            <img 
-              src={board.imageURL} 
-              alt={board.name} 
-              className="w-32 h-32 mx-auto rounded-xl object-contain bg-slate-100 dark:bg-slate-950 p-2 border border-slate-200 dark:border-slate-800"
+            <HardwareImage 
+              category="board"
+              name={board.name}
+              className="w-32 h-32 mx-auto"
             />
             <h2 className="text-xl font-bold mt-4 text-slate-950 dark:text-slate-100">{board.name}</h2>
             <p className="text-sm text-blue-600 dark:text-blue-400 font-semibold">{manufacturerName}</p>
